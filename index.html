@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quyen Freediving Phu Quoc – PADI</title>
+<meta name="description" content="Freediving tours and PADI freediver courses in Phu Quoc. Tour và khóa học lặn tự do PADI tại Phú Quốc.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --abyss:#04121f; --deep:#0a2a43; --mid:#14507a; --shallow:#2a86b3; --foam:#e8f6fb;
+  --amber:#ffb629; --coral:#ff7a3d; --ink:#d6e8f1; --muted:#8fb3c6;
+  --line:rgba(232,246,251,.16);
+  --font:"Bricolage Grotesque","Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:var(--font);color:var(--ink);line-height:1.6;background:linear-gradient(180deg,var(--shallow) 0,var(--mid) 520px,var(--deep) 1500px,var(--abyss) 100%);background-color:var(--abyss);padding-bottom:84px}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3{line-height:1.1;font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(1.8rem,4.5vw,2.8rem);color:var(--amber);margin-bottom:.5rem}
+h3{font-size:1.5rem;color:var(--amber);margin-bottom:.4rem}
+section{padding:72px 0}
+.lead{max-width:60ch;color:var(--ink);margin-bottom:2rem}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:20;background:rgba(4,18,31,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:12px}
+.brand{font-weight:800;text-decoration:none;color:var(--foam)}
+.brand span{color:var(--amber)}
+nav{display:flex;gap:18px;font-size:.95rem}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--foam)}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--muted);padding:6px 14px;font:inherit;font-weight:600;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--amber);color:var(--abyss)}
+@media(max-width:720px){nav{display:none}}
+
+/* hero */
+.hero{padding:0;position:relative;min-height:88vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,18,31,.15) 0,rgba(10,42,67,.55) 55%,var(--mid) 100%)}
+.hero .wrap{position:relative;z-index:2;padding-top:120px;padding-bottom:64px;width:100%}
+.padi{display:inline-block;background:var(--foam);color:var(--abyss);font-weight:800;padding:4px 12px;border-radius:6px;margin-bottom:18px;font-size:.9rem}
+.hero h1{font-size:clamp(3rem,11vw,7.5rem);color:var(--foam);text-transform:uppercase;letter-spacing:-.03em}
+.hero h1 b{display:block;color:transparent;-webkit-text-stroke:2px var(--foam)}
+.hero .place{font-size:clamp(1.4rem,4vw,2.2rem);font-weight:800;color:var(--amber);margin:8px 0 18px}
+.hero p.tag{max-width:46ch;font-size:1.15rem;margin-bottom:26px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:12px;font:inherit;font-weight:700;text-decoration:none;border:2px solid transparent;cursor:pointer;min-height:48px}
+.btn.primary{background:linear-gradient(90deg,var(--amber),var(--coral));color:var(--abyss)}
+.btn.ghost{border-color:var(--foam);color:var(--foam);background:transparent}
+.btn:hover{filter:brightness(1.1)}
+
+/* depth chart */
+.depth{display:grid;gap:14px;max-width:760px}
+.row{display:grid;grid-template-columns:150px 1fr 70px;gap:14px;align-items:center}
+.row .n{font-weight:600}
+.track{height:34px;background:rgba(4,18,31,.45);border-radius:8px;position:relative;overflow:hidden;border:1px solid var(--line)}
+.fill{position:absolute;left:0;top:0;bottom:0;border-radius:0 8px 8px 0;background:linear-gradient(90deg,var(--shallow),var(--amber));width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.depth.go .fill{width:var(--w)}
+.row .m{text-align:right;color:var(--amber);font-weight:800}
+.scale{display:grid;grid-template-columns:150px 1fr 70px;gap:14px;color:var(--muted);font-size:.85rem}
+.scale div:nth-child(2){display:flex;justify-content:space-between}
+@media(max-width:560px){.row,.scale{grid-template-columns:96px 1fr 52px;gap:8px}.row .n{font-size:.9rem}}
+@media(prefers-reduced-motion:reduce){.fill{transition:none}}
+
+/* tours */
+.tours{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;border-top:1px solid var(--line)}
+.tour{padding:30px 26px 34px 0;border-bottom:1px solid var(--line)}
+.tour .for{color:var(--muted);font-style:italic;margin-bottom:6px}
+.tour ul{margin:12px 0 0 1.1rem}
+.tour li{margin-bottom:4px}
+.tour img{border-radius:12px;margin-top:16px;width:100%;max-height:200px;object-fit:cover}
+.tour .price{margin-top:14px;font-weight:800;color:var(--foam)}
+@media(min-width:700px){.tour:nth-child(odd){border-right:1px solid var(--line);padding-right:34px}.tour:nth-child(even){padding-left:34px;padding-right:0}}
+
+/* course */
+.course{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.course img{border-radius:16px;width:100%;height:100%;max-height:520px;object-fit:cover}
+.checks{list-style:none;margin:18px 0}
+.checks li{padding-left:34px;position:relative;margin-bottom:8px;font-weight:600}
+.checks li::before{content:"";position:absolute;left:0;top:.3em;width:20px;height:20px;border-radius:50%;background:#2ecc71}
+.checks li::after{content:"";position:absolute;left:7px;top:.45em;width:5px;height:10px;border:solid #04121f;border-width:0 2px 2px 0;transform:rotate(45deg)}
+@media(max-width:760px){.course{grid-template-columns:1fr}}
+
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.gal img{border-radius:14px;width:100%;height:100%;object-fit:cover;aspect-ratio:2/3}
+@media(max-width:640px){.gal{grid-template-columns:repeat(2,1fr)}}
+
+/* prices */
+.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--line);max-width:760px}
+table{width:100%;border-collapse:collapse;background:rgba(4,18,31,.5)}
+th,td{padding:14px 18px;text-align:left}
+th{background:linear-gradient(90deg,var(--amber),var(--coral));color:var(--abyss)}
+th:last-child,td:last-child{text-align:right;white-space:nowrap}
+td{border-top:1px solid var(--line);font-weight:600}
+td:last-child{color:var(--amber);font-weight:800}
+.incl{max-width:760px;margin-top:26px}
+.incl h3{font-size:1.15rem;color:var(--foam)}
+.incl ul{margin:8px 0 0 1.2rem}
+.note{margin-top:30px;color:var(--muted);font-size:.9rem;max-width:760px}
+
+/* contact */
+.book{text-align:center}
+.book h2{font-size:clamp(2.4rem,8vw,5rem);color:var(--amber)}
+.book .sub{font-size:1.3rem;font-weight:800;color:var(--foam);margin-bottom:26px}
+.contact{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:22px}
+.btn.call{background:var(--foam);color:var(--abyss)}
+.btn.wa{background:#25d366;color:#04121f}
+.btn.zalo{background:#0068ff;color:#fff}
+.btn.mail{border-color:var(--foam);color:var(--foam)}
+.who{color:var(--muted)}
+footer{text-align:center;padding:36px 20px;color:var(--amber);font-weight:800;border-top:1px solid var(--line)}
+footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
+
+/* sticky contact bar */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(3,1fr);background:var(--abyss);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0)}
+.dock a{display:flex;align-items:center;justify-content:center;gap:8px;padding:15px 6px;font-weight:700;text-decoration:none;min-height:56px}
+.dock .c{background:var(--foam);color:var(--abyss)}
+.dock .z{background:#0068ff;color:#fff}
+.dock .w{background:#25d366;color:#04121f}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">Quyen <span>Freediving</span></a>
+    <nav>
+      <a href="#depth" data-i="nav_depth"></a>
+      <a href="#tours" data-i="nav_tours"></a>
+      <a href="#course" data-i="nav_course"></a>
+      <a href="#price" data-i="nav_price"></a>
+      <a href="#book" data-i="nav_book"></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="vi" aria-pressed="true">VI</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <img class="bg" src="images/hero.jpg" alt="Two freedivers surfacing beside a rocky coast in Phu Quoc">
+  <div class="wrap">
+    <span class="padi">PADI</span>
+    <h1>Quyen <b>Freediving</b></h1>
+    <div class="place">Phu Quoc</div>
+    <p class="tag" data-i="hero_tag"></p>
+    <div class="cta-row">
+      <a class="btn primary" href="#book" data-i="cta_book"></a>
+      <a class="btn ghost" href="#price" data-i="cta_price"></a>
+    </div>
+  </div>
+</section>
+
+<section id="depth">
+  <div class="wrap">
+    <h2 data-i="depth_h"></h2>
+    <p class="lead" data-i="depth_p"></p>
+    <div class="depth" id="depthChart">
+      <div class="row"><div class="n" data-i="snk_t"></div><div class="track"><div class="fill" style="--w:3%"></div></div><div class="m" data-i="d_surface"></div></div>
+      <div class="row"><div class="n" data-i="try_t"></div><div class="track"><div class="fill" style="--w:38%"></div></div><div class="m">3–6 m</div></div>
+      <div class="row"><div class="n" data-i="fun_t"></div><div class="track"><div class="fill" style="--w:100%"></div></div><div class="m">16 m</div></div>
+      <div class="scale"><div></div><div><span>0 m</span><span>8 m</span><span>16 m</span></div><div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="tours">
+  <div class="wrap">
+    <h2 data-i="tours_h"></h2>
+    <div class="tours">
+      <article class="tour">
+        <p class="for" data-i="try_for"></p>
+        <h3 data-i="try_t"></h3>
+        <ul>
+          <li data-i="try_1"></li><li data-i="try_2"></li><li data-i="try_3"></li><li data-i="try_4"></li>
+        </ul>
+        <p class="price" data-i="p_try"></p>
+      </article>
+      <article class="tour">
+        <p class="for" data-i="fun_for"></p>
+        <h3 data-i="fun_t"></h3>
+        <ul>
+          <li data-i="fun_1"></li><li data-i="fun_2"></li><li data-i="fun_3"></li><li data-i="fun_4"></li>
+        </ul>
+        <img src="images/fun-freediving.jpg" alt="" loading="lazy">
+        <p class="price" data-i="p_fun"></p>
+      </article>
+      <article class="tour">
+        <h3 data-i="snk_t"></h3>
+        <p data-i="snk_p"></p>
+        <img src="images/snorkeling.jpg" alt="" loading="lazy">
+        <p class="price" data-i="p_snk"></p>
+      </article>
+      <article class="tour">
+        <h3 data-i="mer_t"></h3>
+        <ul>
+          <li data-i="mer_1"></li><li data-i="mer_2"></li><li data-i="mer_3"></li>
+        </ul>
+        <p class="price" data-i="p_mer"></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="course">
+  <div class="wrap course">
+    <div>
+      <h2 data-i="course_h"></h2>
+      <p class="lead" data-i="course_p"></p>
+      <ul class="checks">
+        <li>Freediver</li>
+        <li>Advanced Freediver</li>
+      </ul>
+      <a class="btn primary" href="#book" data-i="cta_book"></a>
+    </div>
+    <img src="images/diver.jpg" alt="Two freedivers descending along a line" loading="lazy">
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="gal">
+      <img src="images/gallery-1.jpg" alt="" loading="lazy">
+      <img src="images/gallery-2.jpg" alt="" loading="lazy">
+      <img src="images/gallery-3.jpg" alt="" loading="lazy">
+      <img src="images/gallery-4.jpg" alt="" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section id="price">
+  <div class="wrap">
+    <h2 data-i="price_h"></h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th data-i="th_tour"></th><th data-i="th_fee"></th></tr></thead>
+        <tbody>
+          <tr><td data-i="try_t"></td><td data-i="p_try"></td></tr>
+          <tr><td data-i="fun_t"></td><td data-i="p_fun"></td></tr>
+          <tr><td data-i="snk_t"></td><td data-i="p_snk"></td></tr>
+          <tr><td data-i="mer_t"></td><td data-i="p_mer"></td></tr>
+          <tr><td data-i="c_free"></td><td data-i="p_cf"></td></tr>
+          <tr><td data-i="c_adv"></td><td data-i="p_ca"></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="incl">
+      <h3 data-i="incl_h"></h3>
+      <ul>
+        <li data-i="incl_1"></li><li data-i="incl_2"></li><li data-i="incl_3"></li><li data-i="incl_4"></li>
+      </ul>
+    </div>
+    <p class="note" data-i="note"></p>
+  </div>
+</section>
+
+<section id="book" class="book">
+  <div class="wrap">
+    <h2 data-i="book_h"></h2>
+    <p class="sub" data-i="book_sub"></p>
+    <div class="contact">
+      <a class="btn call" data-track="call" href="tel:+84935392442">&#128222; <span data-i="b_call"></span></a>
+      <a class="btn wa" data-track="whatsapp" href="https://wa.me/84935392442" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn zalo" data-track="zalo" href="https://zalo.me/0935392442" target="_blank" rel="noopener">Zalo</a>
+      <a class="btn mail" data-track="email" href="mailto:Quyenhuynh.20051985@gmail.com">&#9993; Email</a>
+    </div>
+    <p class="who">Minh Quyen Huynh · +84 93 539 2442 · Quyenhuynh.20051985@gmail.com</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  See inside the Limitless.
+  <small>--- Never Dive Alone ---</small>
+</footer>
+
+<div class="dock">
+  <a class="c" data-track="call" href="tel:+84935392442">&#128222; <span data-i="b_call"></span></a>
+  <a class="z" data-track="zalo" href="https://zalo.me/0935392442" target="_blank" rel="noopener">Zalo</a>
+  <a class="w" data-track="whatsapp" href="https://wa.me/84935392442" target="_blank" rel="noopener">WhatsApp</a>
+</div>
+
+<script>
+/* Click counting: paste your Formspree (or similar) endpoint here to get an email per click.
+   Example: "https://formspree.io/f/xxxxxxx"  — leave empty to turn tracking off. */
+var TRACK_ENDPOINT = "";
+
+var T = {
+  vi:{
+    nav_depth:"Độ sâu",nav_tours:"Tour",nav_course:"Khóa học",nav_price:"Bảng giá",nav_book:"Đặt tour",
+    hero_tag:"Hòa mình vào làn nước trong xanh cùng huấn luyện viên PADI tại Phú Quốc. Tour cho người mới và khóa học lặn tự do chuẩn quốc tế.",
+    cta_book:"Đặt tour ngay",cta_price:"Xem bảng giá",
+    depth_h:"Bạn muốn xuống sâu đến đâu?",depth_p:"Mỗi tour phù hợp một trình độ. Độ sâu tối đa của từng tour:",
+    d_surface:"Mặt nước",
+    tours_h:"Các tour lặn",
+    try_for:"*Tour trải nghiệm cho người mới.",try_t:"Lặn trải nghiệm",
+    try_1:"Hướng dẫn sử dụng các thiết bị lặn cơ bản.",try_2:"Có người hướng dẫn đi kèm đảm bảo an toàn.",try_3:"Độ sâu tối đa từ 3-6m.",try_4:"Quay chụp ảnh + clip gốc.",
+    fun_for:"*Bạn đã có chứng chỉ lặn.",fun_t:"Lặn giải trí",
+    fun_1:"Ôn luyện lại kỹ thuật lặn cơ bản.",fun_2:"Khám phá các điểm lặn san hô ở nhiều khu vực và độ sâu khác nhau.",fun_3:"Độ sâu tối đa 16m.",fun_4:"Quay chụp ảnh + clip gốc.",
+    snk_t:"Lặn ống thở",snk_p:"Hòa mình vào làn nước trong xanh. Chuyến lặn với ống thở có hướng dẫn của chúng tôi mang đến một cách dễ dàng để khám phá những rạn san hô rực rỡ và bơi cùng những loài cá nhiệt đới đầy màu sắc. Không cần kinh nghiệm. Hoàn hảo cho gia đình và những người yêu thiên nhiên.",
+    mer_t:"Lặn tiên cá",mer_1:"Trang thiết bị lặn tiên cá.",mer_2:"Địa điểm lặn mới.",mer_3:"Chụp ảnh với rạn san hô và cá đa dạng.",
+    course_h:"Khóa học lặn freedive",course_p:"Mở khóa bí mật của đại dương. Khóa học PADI freediving kéo dài 3 ngày của chúng tôi cấp cho bạn chứng chỉ lặn được công nhận nhất trên thế giới. Có được sự tự do khám phá cuộc sống biển tuyệt đẹp. Sự tự tin và kĩ năng an toàn. Bắt đầu cuộc phiêu lưu của bạn bây giờ!",
+    price_h:"Bảng giá dịch vụ",th_tour:"Tour",th_fee:"Giá (VND)",
+    p_try:"2.400.000",p_fun:"2.200.000",p_snk:"1.040.000",p_mer:"2.600.000",p_cf:"8.500.000",p_ca:"8.000.000",
+    c_free:"Khóa học Freediver",c_adv:"Khóa học Advanced Freediver",
+    incl_h:"Chi phí đã bao gồm:",incl_1:"Xe đưa, đón tại khách sạn.",incl_2:"Thiết bị lặn (kính, ống thở, fins).",incl_3:"Nước uống, trái cây và bữa trưa.",incl_4:"Hướng dẫn viên an toàn và quay chụp.",
+    note:"*** Các điểm lặn trong ngày sẽ phụ thuộc vào thời tiết và tầm nhìn dưới nước ***",
+    book_h:"Đặt tour",book_sub:"ngay hôm nay",b_call:"Gọi ngay"
+  },
+  en:{
+    nav_depth:"Depth",nav_tours:"Tours",nav_course:"Courses",nav_price:"Prices",nav_book:"Book",
+    hero_tag:"Slip into clear blue water with PADI instructors in Phu Quoc. Tours for first-timers and internationally certified freediving courses.",
+    cta_book:"Book your trip",cta_price:"See prices",
+    depth_h:"How deep do you want to go?",depth_p:"Each tour fits a different level. Maximum depth of each tour:",
+    d_surface:"Surface",
+    tours_h:"Our tours",
+    try_for:"*For non-certified divers.",try_t:"Try freediving",
+    try_1:"Instructions for using diving equipment.",try_2:"An accompanying instructor ensures safety.",try_3:"Instructions for balance when diving.",try_4:"Maximum depth from 3-6 m.",
+    fun_for:"*For certified divers.",fun_t:"Fun freediving",
+    fun_1:"Review basic diving techniques.",fun_2:"Explore beautiful coral reefs at many depths.",fun_3:"Maximum depth 16 m.",fun_4:"Photos and original clips.",
+    snk_t:"Snorkeling",snk_p:"Plunge into the clear blue water. Our guided snorkeling trip offers an easy way to explore vibrant coral reefs and swim alongside colorful tropical fish. No experience needed! Perfect for families and nature lovers.",
+    mer_t:"Intro mermaid",mer_1:"Review the mermaid technique.",mer_2:"New diving spot.",mer_3:"Fish skin and tail.",
+    course_h:"Freediving courses",course_p:"Unlock the ocean's secrets. Our 3-day PADI freediver course grants you the world's most recognized dive certification. Gain the freedom to explore global reefs, build new confidence, and witness stunning marine life. Start your adventure now!",
+    price_h:"Service price list",th_tour:"Tour",th_fee:"Fee (USD)",
+    p_try:"$100",p_fun:"$90",p_snk:"$40",p_mer:"$100",p_cf:"$375",p_ca:"$350",
+    c_free:"Freediver course",c_adv:"Advanced Freediver course",
+    incl_h:"Included:",incl_1:"Hotel transfer (within city center).",incl_2:"Diving equipment (mask, fins).",incl_3:"Refreshments on boat (water, fruit) and lunch.",incl_4:"Tour guide and camera shoot with GoPro.",
+    note:"*** The dive destination will be subject to weather conditions and underwater visibility ***",
+    book_h:"Book",book_sub:"your dive trip today",b_call:"Call now"
+  }
+};
+
+function setLang(l){
+  document.documentElement.lang=l;
+  document.querySelectorAll("[data-i]").forEach(function(el){el.textContent=T[l][el.getAttribute("data-i")]});
+  document.querySelectorAll(".lang button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.lang===l)});
+  try{localStorage.setItem("lang",l)}catch(e){}
+}
+document.querySelectorAll(".lang button").forEach(function(b){b.addEventListener("click",function(){setLang(b.dataset.lang)})});
+var saved=null;try{saved=localStorage.getItem("lang")}catch(e){}
+setLang(saved==="en"||saved==="vi"?saved:"vi");
+
+/* depth bars animate when scrolled into view */
+var chart=document.getElementById("depthChart");
+if("IntersectionObserver" in window){
+  new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){chart.classList.add("go");o.disconnect()}})},{threshold:.3}).observe(chart);
+}else{chart.classList.add("go")}
+
+/* click counting */
+document.querySelectorAll("[data-track]").forEach(function(a){
+  a.addEventListener("click",function(){
+    if(!TRACK_ENDPOINT)return;
+    try{
+      fetch(TRACK_ENDPOINT,{method:"POST",keepalive:true,headers:{"Content-Type":"application/json","Accept":"application/json"},
+        body:JSON.stringify({button:a.dataset.track,page:location.href,time:new Date().toISOString(),lang:document.documentElement.lang})});
+    }catch(e){}
+  });
+});
+</script>
+</body>
+</html>
