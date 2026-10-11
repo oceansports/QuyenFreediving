@@ -17,7 +17,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
-body{font-family:var(--font);color:var(--ink);line-height:1.6;background:linear-gradient(180deg,var(--shallow) 0,var(--mid) 520px,var(--deep) 1500px,var(--abyss) 100%);background-color:var(--abyss);padding-bottom:84px}
+body{font-family:var(--font);color:var(--ink);line-height:1.6;background:linear-gradient(180deg,var(--shallow) 0,var(--mid) 520px,var(--deep) 1500px,var(--abyss) 100%);background-color:var(--abyss);padding-bottom:24px}
 img{max-width:100%;display:block}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--amber);outline-offset:3px}
@@ -72,12 +72,12 @@ nav a:hover{color:var(--foam)}
 
 /* tours */
 .tours{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;border-top:1px solid var(--line)}
-.tour{padding:30px 26px 34px 0;border-bottom:1px solid var(--line)}
-.tour .for{color:var(--muted);font-style:italic;margin-bottom:6px}
+.tour{padding:30px 26px 30px 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column}
 .tour ul{margin:12px 0 0 1.1rem}
 .tour li{margin-bottom:4px}
-.tour img{border-radius:12px;margin-top:16px;width:100%;max-height:200px;object-fit:cover}
-.tour .price{margin-top:14px;font-weight:800;color:var(--foam)}
+.tour .meta{margin-top:auto;padding-top:20px}
+.tour .for{color:var(--muted);font-style:italic;min-height:1.6em;margin-bottom:6px}
+.tour .price{font-weight:800;color:var(--foam);font-size:1.2rem}
 @media(min-width:700px){.tour:nth-child(odd){border-right:1px solid var(--line);padding-right:34px}.tour:nth-child(even){padding-left:34px;padding-right:0}}
 
 /* course */
@@ -90,9 +90,25 @@ nav a:hover{color:var(--foam)}
 @media(max-width:760px){.course{grid-template-columns:1fr}}
 
 /* gallery */
+.strips{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.strips img{border-radius:14px;width:100%;height:100%;object-fit:cover}
+@media(max-width:640px){.strips{grid-template-columns:1fr}}
 .gal{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .gal img{border-radius:14px;width:100%;height:100%;object-fit:cover;aspect-ratio:2/3}
 @media(max-width:640px){.gal{grid-template-columns:repeat(2,1fr)}}
+
+/* gear shop */
+.shop{border:2px solid var(--amber);border-radius:20px;padding:34px;background:linear-gradient(135deg,rgba(255,182,41,.12),rgba(4,18,31,.55));display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:center}
+.shop .ad{display:inline-block;border:1px solid var(--amber);color:var(--amber);border-radius:6px;padding:2px 10px;font-size:.8rem;font-weight:700;margin-bottom:12px}
+.shop h2{margin-bottom:.6rem}
+.shop ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 18px}
+.shop li{padding-left:18px;position:relative;font-weight:600}
+.shop li::before{content:"";position:absolute;left:0;top:.6em;width:8px;height:8px;border-radius:50%;background:var(--amber)}
+.shop .side p{margin-bottom:18px}
+.shop-sub{font-size:1.15rem;font-weight:600;color:var(--foam);margin-bottom:16px}
+.shop .side .shop-url{margin:12px 0 0;color:var(--muted);font-size:.9rem}
+@media(max-width:760px){.shop{grid-template-columns:1fr;padding:24px}}
+@media(max-width:420px){.shop ul{grid-template-columns:1fr}}
 
 /* prices */
 .table-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--line);max-width:760px}
@@ -120,12 +136,13 @@ td:last-child{color:var(--amber);font-weight:800}
 footer{text-align:center;padding:36px 20px;color:var(--amber);font-weight:800;border-top:1px solid var(--line)}
 footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
 
-/* sticky contact bar */
-.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:repeat(3,1fr);background:var(--abyss);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0)}
-.dock a{display:flex;align-items:center;justify-content:center;gap:8px;padding:15px 6px;font-weight:700;text-decoration:none;min-height:56px}
-.dock .c{background:var(--foam);color:var(--abyss)}
-.dock .z{background:#0068ff;color:#fff}
-.dock .w{background:#25d366;color:#04121f}
+/* floating contact buttons, bottom right */
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.fab a{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:700;text-decoration:none;min-height:48px;min-width:132px;box-shadow:0 6px 18px rgba(0,0,0,.4)}
+.fab .c{background:var(--foam);color:var(--abyss)}
+.fab .z{background:#0068ff;color:#fff}
+.fab .w{background:#25d366;color:#04121f}
+.fab a:hover{filter:brightness(1.08)}
 </style>
 </head>
 <body>
@@ -138,6 +155,7 @@ footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
       <a href="#tours" data-i="nav_tours"></a>
       <a href="#course" data-i="nav_course"></a>
       <a href="#price" data-i="nav_price"></a>
+      <a href="#shop" data-i="nav_shop"></a>
       <a href="#book" data-i="nav_book"></a>
     </nav>
     <div class="lang" role="group" aria-label="Language">
@@ -180,34 +198,30 @@ footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
     <h2 data-i="tours_h"></h2>
     <div class="tours">
       <article class="tour">
-        <p class="for" data-i="try_for"></p>
         <h3 data-i="try_t"></h3>
         <ul>
           <li data-i="try_1"></li><li data-i="try_2"></li><li data-i="try_3"></li><li data-i="try_4"></li>
         </ul>
-        <p class="price" data-i="p_try"></p>
+        <div class="meta"><p class="for" data-i="try_for"></p><p class="price" data-i="p_try"></p></div>
       </article>
       <article class="tour">
-        <p class="for" data-i="fun_for"></p>
         <h3 data-i="fun_t"></h3>
         <ul>
           <li data-i="fun_1"></li><li data-i="fun_2"></li><li data-i="fun_3"></li><li data-i="fun_4"></li>
         </ul>
-        <img src="images/fun-freediving.jpg" alt="" loading="lazy">
-        <p class="price" data-i="p_fun"></p>
+        <div class="meta"><p class="for" data-i="fun_for"></p><p class="price" data-i="p_fun"></p></div>
       </article>
       <article class="tour">
         <h3 data-i="snk_t"></h3>
         <p data-i="snk_p"></p>
-        <img src="images/snorkeling.jpg" alt="" loading="lazy">
-        <p class="price" data-i="p_snk"></p>
+        <div class="meta"><p class="for"></p><p class="price" data-i="p_snk"></p></div>
       </article>
       <article class="tour">
         <h3 data-i="mer_t"></h3>
         <ul>
           <li data-i="mer_1"></li><li data-i="mer_2"></li><li data-i="mer_3"></li>
         </ul>
-        <p class="price" data-i="p_mer"></p>
+        <div class="meta"><p class="for"></p><p class="price" data-i="p_mer"></p></div>
       </article>
     </div>
   </div>
@@ -230,6 +244,10 @@ footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
 
 <section id="gallery">
   <div class="wrap">
+    <div class="strips">
+      <img src="images/snorkeling.jpg" alt="" loading="lazy">
+      <img src="images/fun-freediving.jpg" alt="" loading="lazy">
+    </div>
     <div class="gal">
       <img src="images/gallery-1.jpg" alt="" loading="lazy">
       <img src="images/gallery-2.jpg" alt="" loading="lazy">
@@ -265,6 +283,27 @@ footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
   </div>
 </section>
 
+<section id="shop">
+  <div class="wrap">
+    <div class="shop">
+      <div>
+        <span class="ad" data-i="shop_ad"></span>
+        <h2>Ocean Sports VN</h2>
+        <p class="shop-sub" data-i="shop_h"></p>
+        <ul>
+          <li data-i="shop_1"></li><li data-i="shop_2"></li><li data-i="shop_3"></li>
+          <li data-i="shop_4"></li><li data-i="shop_5"></li><li data-i="shop_6"></li>
+        </ul>
+      </div>
+      <div class="side">
+        <p data-i="shop_p"></p>
+        <a class="btn primary" data-track="gear" href="https://www.oceansportsvn.com" target="_blank" rel="noopener sponsored"><span data-i="shop_cta"></span> &#8599;</a>
+        <p class="shop-url">www.oceansportsvn.com</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="book" class="book">
   <div class="wrap">
     <h2 data-i="book_h"></h2>
@@ -285,7 +324,7 @@ footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
   <small>--- Never Dive Alone ---</small>
 </footer>
 
-<div class="dock">
+<div class="fab">
   <a class="c" data-track="call" href="tel:+84935392442">&#128222; <span data-i="b_call"></span></a>
   <a class="z" data-track="zalo" href="https://zalo.me/0935392442" target="_blank" rel="noopener">Zalo</a>
   <a class="w" data-track="whatsapp" href="https://wa.me/84935392442" target="_blank" rel="noopener">WhatsApp</a>
@@ -316,7 +355,10 @@ var T = {
     c_free:"Khóa học Freediver",c_adv:"Khóa học Advanced Freediver",
     incl_h:"Chi phí đã bao gồm:",incl_1:"Xe đưa, đón tại khách sạn.",incl_2:"Thiết bị lặn (kính, ống thở, fins).",incl_3:"Nước uống, trái cây và bữa trưa.",incl_4:"Hướng dẫn viên an toàn và quay chụp.",
     note:"*** Các điểm lặn trong ngày sẽ phụ thuộc vào thời tiết và tầm nhìn dưới nước ***",
-    book_h:"Đặt tour",book_sub:"ngay hôm nay",b_call:"Gọi ngay"
+    book_h:"Đặt tour",book_sub:"ngay hôm nay",b_call:"Gọi ngay",
+    nav_shop:"Thiết bị lặn",shop_ad:"Quảng cáo",shop_h:"Thiết bị lặn chính hãng từ châu Âu và Mỹ",
+    shop_1:"Lặn tự do",shop_2:"Lặn bình khí",shop_3:"Lặn bắn cá",shop_4:"Lặn ống thở",shop_5:"Bơi lội",shop_6:"Tour lặn",
+    shop_p:"Chân nhái, kính lặn, ống thở, đồ lặn và phụ kiện cho mọi bộ môn. Miễn phí vận chuyển cho đơn hàng trên 4 triệu đồng. Có cửa hàng tại Nha Trang.",shop_cta:"Mua sắm tại Ocean Sports VN"
   },
   en:{
     nav_depth:"Depth",nav_tours:"Tours",nav_course:"Courses",nav_price:"Prices",nav_book:"Book",
@@ -337,7 +379,10 @@ var T = {
     c_free:"Freediver course",c_adv:"Advanced Freediver course",
     incl_h:"Included:",incl_1:"Hotel transfer (within city center).",incl_2:"Diving equipment (mask, fins).",incl_3:"Refreshments on boat (water, fruit) and lunch.",incl_4:"Tour guide and camera shoot with GoPro.",
     note:"*** The dive destination will be subject to weather conditions and underwater visibility ***",
-    book_h:"Book",book_sub:"your dive trip today",b_call:"Call now"
+    book_h:"Book",book_sub:"your dive trip today",b_call:"Call now",
+    nav_shop:"Dive gear",shop_ad:"Advertisement",shop_h:"Dive gear from Europe and the US",
+    shop_1:"Freediving",shop_2:"Scuba diving",shop_3:"Spearfishing",shop_4:"Snorkeling",shop_5:"Swimming",shop_6:"Dive tours",
+    shop_p:"Fins, masks, snorkels, wetsuits and accessories for every kind of diving. Free shipping on orders over 4 million VND. Store in Nha Trang.",shop_cta:"Shop at Ocean Sports VN"
   }
 };
 
