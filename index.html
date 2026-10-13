@@ -363,7 +363,7 @@ footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
       </div>
       <div class="side">
         <p data-i="shop_p"></p>
-        <a class="btn primary" data-track="oceansports" href="https://www.oceansportsvn.com" target="_blank" rel="noopener sponsored"><span data-i="shop_cta"></span> &#8599;</a>
+        <a class="btn primary" data-track="shop" data-where="mục quảng cáo thiết bị lặn" href="https://www.oceansportsvn.com" target="_blank" rel="noopener sponsored"><span data-i="shop_cta"></span> &#8599;</a>
         <p class="shop-url">www.oceansportsvn.com</p>
       </div>
     </div>
@@ -375,9 +375,9 @@ footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
     <h2 data-i="book_h"></h2>
     <p class="sub" data-i="book_sub"></p>
     <div class="contact">
-      <a class="btn call" data-track="call" href="tel:+84935392442">&#128222; <span data-i="b_call"></span></a>
-      <a class="btn wa" data-track="whatsapp" href="https://wa.me/84935392442" target="_blank" rel="noopener">WhatsApp</a>
-      <a class="btn zalo" data-track="zalo" href="https://zalo.me/0935392442" target="_blank" rel="noopener">Zalo</a>
+      <a class="btn call" data-track="call" data-where="mục Đặt tour" href="tel:+84935392442">&#128222; <span data-i="b_call"></span></a>
+      <a class="btn wa" data-track="wa" data-where="mục Đặt tour" href="https://wa.me/84935392442" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn zalo" data-track="zalo" data-where="mục Đặt tour" href="https://zalo.me/0935392442" target="_blank" rel="noopener">Zalo</a>
       <a class="btn mail" href="mailto:Quyenhuynh.20051985@gmail.com">&#9993; Email</a>
     </div>
     <p class="who">Minh Quyen Huynh · +84 93 539 2442 · Quyenhuynh.20051985@gmail.com</p>
@@ -391,18 +391,15 @@ footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
 </footer>
 
 <div class="fab">
-  <a class="c" data-track="call" href="tel:+84935392442">&#128222; <span data-i="b_call"></span></a>
-  <a class="z" data-track="zalo" href="https://zalo.me/0935392442" target="_blank" rel="noopener">Zalo</a>
-  <a class="w" data-track="whatsapp" href="https://wa.me/84935392442" target="_blank" rel="noopener">WhatsApp</a>
+  <a class="c" data-track="call" data-where="nút nổi góc phải" href="tel:+84935392442">&#128222; <span data-i="b_call"></span></a>
+  <a class="z" data-track="zalo" data-where="nút nổi góc phải" href="https://zalo.me/0935392442" target="_blank" rel="noopener">Zalo</a>
+  <a class="w" data-track="wa" data-where="nút nổi góc phải" href="https://wa.me/84935392442" target="_blank" rel="noopener">WhatsApp</a>
 </div>
 
 <script>
-/* Click counting (Google Apps Script web app).
-   1) Deploy google-apps-script/Code.gs as a web app and paste its URL below.
-   2) Use the same secret in TRACK_TOKEN as CFG.TOKEN in Code.gs.
-   Leave TRACK_URL empty to turn counting off. */
+/* Đếm lượt bấm: dán URL /exec của Google Apps Script vào TRACK_URL.
+   Để trống thì không đếm. */
 var TRACK_URL = "https://script.google.com/macros/s/AKfycbzljJXeT3VpFMWu2sa0cmXLq6zPlMc-PdjCG5Dxe-e6TpOU9Hgp3nc2TCb0TDorq8TQvg/exec";
-var TRACK_TOKEN = "CHANGE-ME-TO-A-LONG-RANDOM-STRING";
 
 var T = {
   vi:{
@@ -512,17 +509,18 @@ if("IntersectionObserver" in window){
   new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){chart.classList.add("go");o.disconnect()}})},{threshold:.3}).observe(chart);
 }else{chart.classList.add("go")}
 
-/* click counting: call, zalo, whatsapp, oceansports */
-function track(name){
+/* click counting: call, zalo, wa, shop */
+function track(channel,where){
   if(!TRACK_URL)return;
-  var body=JSON.stringify({token:TRACK_TOKEN,button:name,location:LOC,lang:LANG,page:location.origin+location.pathname});
+  var body=JSON.stringify({channel:channel,where:where||"",loc:LOC,lang:LANG,ref:document.referrer||""});
   try{
-    if(navigator.sendBeacon&&navigator.sendBeacon(TRACK_URL,new Blob([body],{type:"text/plain;charset=UTF-8"})))return;
+    fetch(TRACK_URL,{method:"POST",mode:"no-cors",keepalive:true,headers:{"Content-Type":"text/plain;charset=UTF-8"},body:body});
+    return;
   }catch(e){}
-  try{fetch(TRACK_URL,{method:"POST",mode:"no-cors",keepalive:true,headers:{"Content-Type":"text/plain;charset=UTF-8"},body:body})}catch(e){}
+  try{navigator.sendBeacon&&navigator.sendBeacon(TRACK_URL,new Blob([body],{type:"text/plain;charset=UTF-8"}))}catch(e){}
 }
 document.querySelectorAll("[data-track]").forEach(function(a){
-  a.addEventListener("click",function(){track(a.dataset.track)});
+  a.addEventListener("click",function(){track(a.dataset.track,a.dataset.where)});
 });
 </script>
 </body>
