@@ -196,7 +196,7 @@ footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
 
 <main id="top">
 <section class="hero">
-  <img class="bg" src="images/hero.jpg" alt="Two freedivers surfacing beside a rocky coast in Phu Quoc">
+  <img class="bg" src="images/hero.jpeg" alt="Two freedivers surfacing beside a rocky coast in Phu Quoc">
   <div class="wrap">
     <div class="chooser">
       <p class="q" data-i="choose_q"></p>
@@ -274,7 +274,7 @@ footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
       </ul>
       <a class="btn primary" href="#book" data-i="cta_book"></a>
     </div>
-    <img src="images/diver.jpg" alt="Two freedivers descending along a line" loading="lazy">
+    <img src="images/diver.jpeg" alt="Two freedivers descending along a line" loading="lazy">
   </div>
 </section>
 
@@ -315,10 +315,10 @@ footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
       <img src="images/fun-freediving.jpg" alt="" loading="lazy">
     </div>
     <div class="gal">
-      <img src="images/gallery-1.jpg" alt="" loading="lazy">
-      <img src="images/gallery-2.jpg" alt="" loading="lazy">
-      <img src="images/gallery-3.jpg" alt="" loading="lazy">
-      <img src="images/gallery-4.jpg" alt="" loading="lazy">
+      <img src="images/gallery-1.jpeg" alt="" loading="lazy">
+      <img src="images/gallery-2.jpeg" alt="" loading="lazy">
+      <img src="images/gallery-3.jpeg" alt="" loading="lazy">
+      <img src="images/gallery-4.jpeg" alt="" loading="lazy">
     </div>
   </div>
 </section>
@@ -495,17 +495,14 @@ function render(){
   var name=LOC==="nt"?"Nha Trang":"Phu Quoc";
   document.title="Quyen Freediving "+name+" – PADI";
   try{localStorage.setItem("lang",LANG);localStorage.setItem("loc",LOC)}catch(e){}
-  try{var u=new URL(location.href);u.searchParams.set("loc",LOC);history.replaceState(null,"",u)}catch(e){}
 }
 document.querySelectorAll("[data-lang]").forEach(function(b){b.addEventListener("click",function(){LANG=b.dataset.lang;render()})});
 document.querySelectorAll("[data-loc]").forEach(function(b){b.addEventListener("click",function(){LOC=b.dataset.loc;render()})});
 (function(){
-  var sl=null,sc=null,q=null;
+  var sl=null,sc=null;
   try{sl=localStorage.getItem("lang");sc=localStorage.getItem("loc")}catch(e){}
-  try{q=new URLSearchParams(location.search).get("loc")}catch(e){}
   if(sl==="en"||sl==="vi")LANG=sl;
   if(sc==="pq"||sc==="nt")LOC=sc;
-  if(q==="pq"||q==="nt")LOC=q;
   render();
 })();
 
