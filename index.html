@@ -130,6 +130,8 @@ nav a:hover{color:var(--foam)}
 .shop li{padding-left:18px;position:relative;font-weight:600}
 .shop li::before{content:"";position:absolute;left:0;top:.6em;width:8px;height:8px;border-radius:50%;background:var(--amber)}
 .shop .side p{margin-bottom:18px}
+.shop .adlink{color:inherit;text-decoration:none}
+.shop .adlink:hover{text-decoration:underline}
 .shop-sub{font-size:1.15rem;font-weight:600;color:var(--foam);margin-bottom:16px}
 .shop .side .shop-url{margin:12px 0 0;color:var(--muted);font-size:.9rem}
 @media(max-width:760px){.shop{grid-template-columns:1fr;padding:24px}}
@@ -146,6 +148,10 @@ td:last-child{color:var(--amber);font-weight:800}
 .incl{max-width:760px;margin-top:26px}
 .incl h3{font-size:1.15rem;color:var(--foam)}
 .incl ul{margin:8px 0 0 1.2rem}
+.scuba{margin-top:56px}
+.scuba h3{font-size:1.6rem;margin-bottom:14px}
+.scuba table{min-width:560px}
+.sc-note{max-width:760px;margin-top:14px}
 .note{margin-top:30px;color:var(--muted);font-size:.9rem;max-width:760px}
 
 /* contact */
@@ -346,6 +352,22 @@ footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
       </ul>
     </div>
     <p class="note" data-i="note"></p>
+
+    <div class="scuba">
+      <h3 data-i="sc_h"></h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th data-i="sc_th1"></th><th data-i="sc_th2"></th><th data-i="sc_th3"></th><th data-i="sc_th4"></th></tr></thead>
+          <tbody>
+            <tr><td data-i="sc_try_t"></td><td>2</td><td data-i="sc_try_d"></td><td data-i="sc_try_p"></td></tr>
+            <tr><td data-i="sc_fun_t"></td><td>2</td><td data-i="sc_fun_d"></td><td data-i="sc_fun_p"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="sc-note" data-i="sc_private"></p>
+      <p class="sc-note" data-i="sc_incl"></p>
+      <p class="sc-note" data-i="sc_weather"></p>
+    </div>
   </div>
 </section>
 
@@ -354,7 +376,7 @@ footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
     <div class="shop">
       <div>
         <span class="ad" data-i="shop_ad"></span>
-        <h2>Ocean Sports VN</h2>
+        <h2><a class="adlink" data-track="shop" data-where="mục quảng cáo: tên đơn vị" href="https://www.oceansportsvn.com" target="_blank" rel="noopener sponsored">Ocean Sports VN</a></h2>
         <p class="shop-sub" data-i="shop_h"></p>
         <ul>
           <li data-i="shop_1"></li><li data-i="shop_2"></li><li data-i="shop_3"></li>
@@ -363,8 +385,8 @@ footer small{display:block;color:var(--muted);font-weight:400;margin-top:6px}
       </div>
       <div class="side">
         <p data-i="shop_p"></p>
-        <a class="btn primary" data-track="shop" data-where="mục quảng cáo thiết bị lặn" href="https://www.oceansportsvn.com" target="_blank" rel="noopener sponsored"><span data-i="shop_cta"></span> &#8599;</a>
-        <p class="shop-url">www.oceansportsvn.com</p>
+        <a class="btn primary" data-track="shop" data-where="mục quảng cáo: nút" href="https://www.oceansportsvn.com" target="_blank" rel="noopener sponsored"><span data-i="shop_cta"></span> &#8599;</a>
+        <p class="shop-url"><a class="adlink" data-track="shop" data-where="mục quảng cáo: link website" href="https://www.oceansportsvn.com" target="_blank" rel="noopener sponsored">www.oceansportsvn.com</a></p>
       </div>
     </div>
   </div>
@@ -415,6 +437,12 @@ var T = {
     d2_b:"Nghe hướng dẫn và thực hành lại các kỹ năng đã học trong hồ bơi",d2_b1:"Ôn lại các kỹ thuật cơ bản như di chuyển dưới nước, hít thở bình thường, điều khiển độ nổi trung tính.",d2_b2:"Thực hành các kỹ năng ứng phó khẩn cấp.",
     d2_c:"Thực hành lấy độ sâu",d2_c1:"Học viên thực hành kiểm soát độ sâu khi lặn.",d2_c2:"Tăng dần độ sâu theo từng ca lặn để làm quen với áp lực nước ở các mức độ khác nhau.",
     d2_d:"Kết thúc khóa học",d2_d1:"Làm bài kiểm tra lý thuyết để đánh giá kiến thức đã học.",d2_d2:"Thực hiện bài kiểm tra kỹ năng thực hành dưới nước.",
+    sc_h:"Tour lặn scuba (bình khí)",sc_th1:"Tour",sc_th2:"Số lần lặn/ngày",sc_th3:"Thời gian lặn",sc_th4:"Giá (USD)",
+    sc_try_t:"Lặn scuba trải nghiệm",sc_fun_t:"Lặn scuba giải trí",sc_try_d:"20 đến 30 phút/điểm lặn",sc_fun_d:"40 đến 50 phút/điểm lặn",
+    sc_try_p_pq:"$115",sc_fun_p_pq:"$105",sc_try_p_nt:"Đang cập nhật",sc_fun_p_nt:"Đang cập nhật",
+    sc_private:"Chúng tôi cũng tổ chức tour lặn riêng cho nhóm nhỏ (1 đến 4 khách). Liên hệ để biết thêm thông tin.",
+    sc_incl:"Đã bao gồm: xe đưa đón tại khách sạn (trong trung tâm thành phố), thiết bị lặn chất lượng cao, phí tàu, đồ uống nhẹ trên tàu (trà, cà phê, trái cây) và bữa trưa.",
+    sc_weather:"Các điểm lặn phụ thuộc vào thời tiết và tầm nhìn dưới nước.",
     nav_depth:"Độ sâu",nav_tours:"Tour",nav_course:"Khóa học",nav_price:"Bảng giá",nav_book:"Đặt tour",
     hero_tag:"Hòa mình vào làn nước trong xanh cùng huấn luyện viên PADI tại Phú Quốc. Tour cho người mới và khóa học lặn tự do chuẩn quốc tế.",
     cta_book:"Đặt tour ngay",cta_price:"Xem bảng giá",
@@ -452,6 +480,12 @@ var T = {
     d2_b:"Briefing and practising the skills learned in the pool",d2_b1:"Review basics such as moving underwater, normal breathing and controlling neutral buoyancy.",d2_b2:"Practise emergency response skills.",
     d2_c:"Depth practice",d2_c1:"Students practise controlling their depth.",d2_c2:"Depth increases gradually with each dive to get used to water pressure at different levels.",
     d2_d:"End of the course",d2_d1:"Written theory exam to assess what you have learned.",d2_d2:"Underwater practical skills test.",
+    sc_h:"Scuba tours",sc_th1:"Tour",sc_th2:"Dives per day",sc_th3:"Dive duration",sc_th4:"Fee (USD)",
+    sc_try_t:"Try scuba",sc_fun_t:"Fun dive",sc_try_d:"20 to 30 mins/site",sc_fun_d:"40 to 50 mins/site",
+    sc_try_p_pq:"$115",sc_fun_p_pq:"$105",sc_try_p_nt:"Updating",sc_fun_p_nt:"Updating",
+    sc_private:"We also run private diving tours for a limited number of people (1 to 4 guests). Contact us for more information.",
+    sc_incl:"Fee included: hotel transfer (within city center), high-quality gear, boat fee, refreshments on boat (tea, coffee, fruits) and lunch.",
+    sc_weather:"Dive sites depend on weather conditions and underwater visibility.",
     nav_depth:"Depth",nav_tours:"Tours",nav_course:"Courses",nav_price:"Prices",nav_book:"Book",
     hero_tag:"Slip into clear blue water with PADI instructors in Phu Quoc. Tours for first-timers and internationally certified freediving courses.",
     cta_book:"Book your trip",cta_price:"See prices",
